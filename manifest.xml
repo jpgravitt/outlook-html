@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Add-in-only (XML) manifest: required because Outlook for Mac doesn't support the unified JSON manifest. -->
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="MailApp">
+  <Id>ffff6a56-5fbe-438f-8b2d-21d97a5adf5c</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>JP Gravitt</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="JP Signature"/>
+  <Description DefaultValue="Automatically inserts JP's default or External signature."/>
+  <IconUrl DefaultValue="https://YOUR-HOST/jp-signature-addin/assets/icon-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://YOUR-HOST/jp-signature-addin/assets/icon-128.png"/>
+  <SupportUrl DefaultValue="https://YOUR-HOST/jp-signature-addin/index.html"/>
+  <AppDomains>
+    <AppDomain>https://YOUR-HOST</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+  <Requirements>
+    <Sets DefaultMinVersion="1.1">
+      <Set Name="Mailbox"/>
+    </Sets>
+  </Requirements>
+
+  <!-- Legacy schema block (required). Overridden by VersionOverrides below. -->
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://YOUR-HOST/jp-signature-addin/index.html"/>
+        <RequestedHeight>250</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+  <Permissions>ReadWriteItem</Permissions>
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  </Rule>
+  <DisableEntityHighlighting>true</DisableEntityHighlighting>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
+      <Description resid="residAppDesc"/>
+      <Requirements>
+        <bt:Sets DefaultMinVersion="1.11">
+          <bt:Set Name="Mailbox"/>
+        </bt:Sets>
+      </Requirements>
+      <Hosts>
+        <Host xsi:type="MailHost">
+          <Runtimes>
+            <!-- Mac, web, and new Outlook on Windows load the HTML page; classic Windows loads the JS file. -->
+            <Runtime resid="residRuntimeHtml">
+              <Override type="javascript" resid="residRuntimeJs"/>
+            </Runtime>
+          </Runtimes>
+          <DesktopFormFactor>
+            <ExtensionPoint xsi:type="LaunchEvent">
+              <LaunchEvents>
+                <LaunchEvent Type="OnNewMessageCompose" FunctionName="onNewMessageComposeHandler"/>
+                <LaunchEvent Type="OnMessageRecipientsChanged" FunctionName="onMessageRecipientsChangedHandler"/>
+              </LaunchEvents>
+              <SourceLocation resid="residRuntimeHtml"/>
+            </ExtensionPoint>
+          </DesktopFormFactor>
+        </Host>
+      </Hosts>
+      <Resources>
+        <bt:Images>
+          <bt:Image id="Icon16x16" DefaultValue="https://YOUR-HOST/jp-signature-addin/assets/icon-16.png"/>
+          <bt:Image id="Icon32x32" DefaultValue="https://YOUR-HOST/jp-signature-addin/assets/icon-32.png"/>
+          <bt:Image id="Icon80x80" DefaultValue="https://YOUR-HOST/jp-signature-addin/assets/icon-80.png"/>
+        </bt:Images>
+        <bt:Urls>
+          <bt:Url id="residRuntimeHtml" DefaultValue="https://YOUR-HOST/jp-signature-addin/src/runtime.html"/>
+          <bt:Url id="residRuntimeJs" DefaultValue="https://YOUR-HOST/jp-signature-addin/src/runtime.js"/>
+        </bt:Urls>
+        <bt:LongStrings>
+          <bt:String id="residAppDesc" DefaultValue="Automatically inserts JP's default or External signature."/>
+        </bt:LongStrings>
+      </Resources>
+    </VersionOverrides>
+  </VersionOverrides>
+</OfficeApp>
