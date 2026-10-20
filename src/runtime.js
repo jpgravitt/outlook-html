@@ -23,7 +23,8 @@ var FONT_NAME = "'Public Sans Black','Public Sans',Aptos,sans-serif";
 
 var CSS_BODY = "margin:0;font-family:" + FONT_BODY + ";font-size:11pt;color:#000000;";
 var CSS_NAME = "margin:0;font-family:" + FONT_NAME + ";font-size:15pt;font-variant:small-caps;color:#000000;";
-var CSS_SPACER = "margin:0;font-family:" + FONT_BODY + ";font-size:2pt;line-height:2pt;color:#000000;";
+// Opening line of the External signature: same font as the body, plus 6pt space after.
+var CSS_LEAD = "margin:0 0 6pt 0;font-family:" + FONT_BODY + ";font-size:11pt;color:#000000;";
 var CSS_EMAIL = "color:blue;text-decoration:underline;";
 var CSS_LOGO_LINK = "color:#000000;text-decoration:none;";
 var CSS_LOGO_IMG = "border:0;width:78px;height:23px;";
@@ -35,7 +36,7 @@ var STYLE_BLOCK =
   "<style>" +
   ".jpsig-line{" + CSS_BODY + "}" +
   ".jpsig-name{" + CSS_NAME + "}" +
-  ".jpsig-spacer{" + CSS_SPACER + "}" +
+  ".jpsig-lead{" + CSS_LEAD + "}" +
   ".jpsig-email{" + CSS_EMAIL + "}" +
   ".jpsig-logolink{" + CSS_LOGO_LINK + "}" +
   ".jpsig-logo{" + CSS_LOGO_IMG + "}" +
@@ -49,8 +50,7 @@ function buildHtml(name, logoName) {
   var h = STYLE_BLOCK + "<div class=\"jpsig\">";
   h += line("&nbsp;");
   if (name === "external") {
-    h += line("If you have any questions or concerns, feel free to contact me via email or phone (listed below).");
-    h += "<div class=\"jpsig-spacer\" style=\"" + CSS_SPACER + "\">&nbsp;</div>";
+    h += "<div class=\"jpsig-lead\" style=\"" + CSS_LEAD + "\">If you have any questions or concerns, feel free to contact me via email or phone (listed below).</div>";
   }
   h += "<div class=\"jpsig-name\" style=\"" + CSS_NAME + "\">JP Gravitt, E.I.</div>";
   h += line("Environmental Engineer, Sr.");

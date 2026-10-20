@@ -16,6 +16,8 @@ All text is Public Sans. Aptos is only the fallback. The ADEM logo is embedded i
 
 ## Setup (about 15 minutes, done once)
 
+> **Requires new Outlook for Mac.** Legacy Outlook for Mac only supports add-in API sets up to 1.8. Automatic (event-based) add-ins and `setSignatureAsync` need 1.10 or later, so in legacy Outlook this add-in never runs. Turn **off** the "Legacy Outlook" switch under the **Outlook** menu.
+
 ### 1. Install Public Sans on your Mac
 1. Download it from Google Fonts (fonts.google.com, search "Public Sans") and unzip it.
 2. Open the `static` folder, select **every** `.ttf` file (Black is included), and double-click to install them with Font Book.
@@ -25,10 +27,10 @@ Without the font installed, you'll see Aptos while writing. Recipients who don't
 
 ### 2. Host the files (free, using GitHub Pages)
 Outlook loads add-in code from an HTTPS address, so the files need to live online.
-1. On github.com, create a **public** repository named exactly **`jp-signature-addin`**.
+1. On github.com, create a **public** repository named exactly **`outlook-html`** (or use another name and replace `outlook-html` in `manifest.xml` and `configure.sh`).
 2. Upload everything in this folder **except** `test/` (it's harmless if you include it).
 3. Go to repo **Settings → Pages → Build and deployment** and set Source to **Deploy from a branch**, branch `main`, folder `/ (root)`. Save.
-4. After about a minute, check that `https://<your-username>.github.io/jp-signature-addin/index.html` loads.
+4. After about a minute, check that `https://<your-username>.github.io/outlook-html/index.html` loads.
 
 The hosted files contain only the contact details already in your signature.
 
